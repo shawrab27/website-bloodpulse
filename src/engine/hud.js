@@ -1,11 +1,12 @@
 import gsap from 'gsap';
 import { masterTimeline, getCurrentLabel } from './timeline.js';
 import { getLenis } from './scroll.js';
+import { getWingTimeScale } from './wings.js';
 
 /**
  * Debug HUD:
  * Toggled with key 'D' (hidden by default).
- * Displays scroll progress %, current active label, FPS, and scroll velocity.
+ * Displays scroll progress %, current active label, FPS, scroll velocity, and wing timeScale.
  */
 export function initDebugHud() {
   const hud = document.getElementById('debug-hud');
@@ -15,6 +16,7 @@ export function initDebugHud() {
   const valLabel = document.getElementById('hud-label');
   const valFps = document.getElementById('hud-fps');
   const valVelocity = document.getElementById('hud-velocity');
+  const valWings = document.getElementById('hud-wings');
 
   // Toggle HUD with 'D' key
   window.addEventListener('keydown', (event) => {
@@ -64,6 +66,11 @@ export function initDebugHud() {
     if (valVelocity) {
       const velocity = lenis ? Math.round(lenis.velocity) : 0;
       valVelocity.textContent = `${velocity} px/s`;
+    }
+
+    // Wing flapping timeScale
+    if (valWings) {
+      valWings.textContent = `${getWingTimeScale().toFixed(2)}x`;
     }
   });
 }

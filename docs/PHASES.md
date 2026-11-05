@@ -7,7 +7,7 @@ Development is strictly partitioned into linear, verifiable phases. No subsequen
 [Phase 0: Project Setup] (DONE)
           │
           ▼
-[Phase 1: Butterfly Engine & Kinematics]
+[Phase 1: Butterfly Engine & Kinematics] (DONE)
           │
           ▼
 [Phase 2: Scenes 1-3 (Normalcy, Accident & Aftermath)]
@@ -50,12 +50,15 @@ Development is strictly partitioned into linear, verifiable phases. No subsequen
 ---
 
 ## Phase 1: Butterfly Kinematics & Wing Engine
-- **Status**: [ ] Pending
+- **Status**: [x] Completed
 - **Deliverables**:
-  - [ ] Implement `src/engine/wings.js` velocity controller.
-  - [ ] Author articulated vector butterfly component in `src/assets/svg/butterfly.svg`.
-  - [ ] Integrate `ScrollTrigger.getVelocity()` to scale wing flap frequency (`timeScale: 0.3` idle to `1.8` peak).
-  - [ ] Implement smooth return damping when scroll velocity returns to zero.
+  - [x] Implement `src/engine/wings.js` velocity controller with shared GSAP ticker and lerp smoothing.
+  - [x] Author articulated vector butterfly component in `src/assets/svg/butterfly.svg`.
+  - [x] Integrate `lenis.velocity` coupling to scale wing flap frequency (`timeScale: 0.3` idle to `1.8` peak).
+  - [x] Implement smooth return damping when scroll velocity returns to zero.
+  - [x] Implement gentle idle float (small y and rotation drift, transform only).
+  - [x] Implement Phase 1 test scene: butterfly 1 moves slowly downward during first 10% of scroll.
+  - [x] Display wing timeScale telemetry in Debug HUD (toggle with key 'D').
 - **Acceptance Criteria**:
   - Wings continuously flap at 0.3 timeScale when static.
   - Fast scroll elevates wing speed up to 1.8 timeScale smoothly.

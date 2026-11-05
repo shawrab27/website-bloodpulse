@@ -19,20 +19,57 @@
           preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <!-- Phase 0 Canvas Placeholder -->
+          <!-- Background Stage Canvas -->
           <rect width="1920" height="1080" fill="transparent" />
-          <text
-            x="960"
-            y="540"
-            text-anchor="middle"
-            dominant-baseline="middle"
-            fill="#B5B0AE"
-            font-family="Georgia, serif"
-            font-size="28"
-            letter-spacing="2"
-          >
-            BLOODPULSE &bull; STAGE 1920&times;1080 [PHASE 0]
-          </text>
+
+          <!-- Butterfly 1 (Mounted at design center: 960, 540 via GSAP) -->
+          <g id="butterfly-1" class="butterfly-container">
+            <!-- Inner float group for idle hovering drift -->
+            <g class="butterfly-float">
+              <!-- Left Wing (flaps with scaleX relative to body axis at 0,0) -->
+              <g class="wing wing-left" style="transform-origin: 0px 0px;">
+                <!-- Forewing -->
+                <path d="M 0,-14 C -22,-58 -70,-68 -84,-48 C -96,-30 -82,2 -42,8 C -18,10 -2,0 0,-4 Z" fill="#C30121" />
+                <!-- Hindwing -->
+                <path d="M 0,2 C -24,10 -54,8 -56,32 C -58,52 -28,62 -14,48 C -4,38 0,18 0,14 Z" fill="#A8001A" />
+                <!-- Vein accents -->
+                <path d="M 0,-10 C -25,-35 -55,-40 -70,-32" stroke="#4A1A22" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.4" />
+                <path d="M -30,-22 C -55,-18 -72,-10 -76,-5" stroke="#4A1A22" stroke-width="1" stroke-linecap="round" stroke-opacity="0.35" />
+                <path d="M -22,-8 C -42,5 -55,18 -50,30" stroke="#4A1A22" stroke-width="1" stroke-linecap="round" stroke-opacity="0.35" />
+                <circle cx="-62" cy="-40" r="3" fill="#FFF8F7" opacity="0.3" />
+                <circle cx="-74" cy="-25" r="2.5" fill="#FFF8F7" opacity="0.25" />
+                <circle cx="-46" cy="40" r="2" fill="#FFF8F7" opacity="0.25" />
+              </g>
+
+              <!-- Right Wing (flaps with scaleX relative to body axis at 0,0) -->
+              <g class="wing wing-right" style="transform-origin: 0px 0px;">
+                <!-- Forewing -->
+                <path d="M 0,-14 C 22,-58 70,-68 84,-48 C 96,-30 82,2 42,8 C 18,10 2,0 0,-4 Z" fill="#C30121" />
+                <!-- Hindwing -->
+                <path d="M 0,2 C 24,10 54,8 56,32 C 58,52 28,62 14,48 C 4,38 0,18 0,14 Z" fill="#A8001A" />
+                <!-- Vein accents -->
+                <path d="M 0,-10 C 25,-35 55,-40 70,-32" stroke="#4A1A22" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.4" />
+                <path d="M 30,-22 C 55,-18 72,-10 76,-5" stroke="#4A1A22" stroke-width="1" stroke-linecap="round" stroke-opacity="0.35" />
+                <path d="M 22,-8 C 42,5 55,18 50,30" stroke="#4A1A22" stroke-width="1" stroke-linecap="round" stroke-opacity="0.35" />
+                <circle cx="62" cy="-40" r="3" fill="#FFF8F7" opacity="0.3" />
+                <circle cx="74" cy="-25" r="2.5" fill="#FFF8F7" opacity="0.25" />
+                <circle cx="46" cy="40" r="2" fill="#FFF8F7" opacity="0.25" />
+              </g>
+
+              <!-- Butterfly Body, Head & Antennae -->
+              <g class="butterfly-body">
+                <path d="M -3,-2 C -3,22 -1.5,34 0,38 C 1.5,34 3,22 3,-2 Z" fill="#4A1A22" />
+                <ellipse cx="0" cy="-10" rx="4.5" ry="11" fill="#3D141B" />
+                <circle cx="0" cy="-23" r="4.5" fill="#4A1A22" />
+                <circle cx="-2.5" cy="-24.5" r="1.2" fill="#C30121" />
+                <circle cx="2.5" cy="-24.5" r="1.2" fill="#C30121" />
+                <path d="M -1.8,-26 C -5,-36 -14,-43 -19,-41" stroke="#4A1A22" stroke-width="1.4" stroke-linecap="round" fill="none" />
+                <circle cx="-19" cy="-41" r="1.2" fill="#C30121" />
+                <path d="M 1.8,-26 C 5,-36 14,-43 19,-41" stroke="#4A1A22" stroke-width="1.4" stroke-linecap="round" fill="none" />
+                <circle cx="19" cy="-41" r="1.2" fill="#C30121" />
+              </g>
+            </g>
+          </g>
         </svg>
       </div>
     </div>
@@ -64,6 +101,10 @@
       <div class="hud-row">
         <span class="hud-label">Velocity:</span>
         <span id="hud-velocity" class="hud-val">0 px/s</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-label">Wings:</span>
+        <span id="hud-wings" class="hud-val">0.30x</span>
       </div>
       <div class="hud-hint">Press 'D' to toggle</div>
     </aside>

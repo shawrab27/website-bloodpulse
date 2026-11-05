@@ -7,7 +7,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Planned
-- **Phase 1**: Velocity-coupled butterfly kinematics engine (`src/engine/wings.js`).
 - **Phase 2**: Implementation of Scene 01, Scene 02 (ambulance collision), and Scene 03 (aftermath).
 - **Phase 3**: Implementation of Scene 04 (witness butterfly) and Scene 05 (device elevation).
 - **Phase 4**: Implementation of Scene 06 through Scene 09 (national map, matching, standby fail-safe).
@@ -15,6 +14,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - **Phase 6**: Implementation of Scene 12 (swarm convergence, logo lockup, footer CTAs).
 - **Phase 7**: Responsive tablet and mobile layouts, strict node capping, reduced-motion audit.
 - **Phase 8**: Production performance audit, cross-browser verification, and Nginx deployment pipeline.
+
+---
+
+## [0.2.0] - Phase 1: Butterfly Kinematics & Wing Engine
+### Added
+- **Articulated Vector Butterfly Asset (`src/assets/svg/butterfly.svg`)**:
+  - Precision vector model with crimson wings (`#C30121`), maroon body/thorax (`#4A1A22`), antennae, and wing accents (< 3 KB).
+  - Independent left and right wing groups pivoted on central body axis (`0px 0px`).
+- **Velocity-Coupled Wing Engine (`src/engine/wings.js`)**:
+  - Single shared `gsap.ticker` callback driving all butterfly wing cycles.
+  - Flapping animation using `scaleX` only (strictly transform, no filters/3D).
+  - Velocity coupling using `lenis.velocity` as primary input with responsive lerp smoothing (`timeScale: 0.3` idle to `1.8` peak).
+  - Smooth damping return to idle when scrolling stops (decay half-life ~0.2s).
+  - State management (`normal` vs `injured` faint spasms).
+  - Continuous gentle idle float (y & rotation drift, transform only).
+- **Stage Integration & Test Scene**:
+  - Mounted Butterfly 1 at canvas center `(960, 540)` in `index.html`.
+  - Phase 1 test scene: Butterfly 1 moves slowly downward during first 10% of scroll.
+  - Debug HUD telemetry: added live `Wings: X.XXx` timeScale readout.
+  - Full respect for `prefers-reduced-motion` (locks at 0.3x without velocity acceleration).
 
 ---
 
