@@ -15,7 +15,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
-## [0.4.0] - Phase 3: Scenes 4 and 5 (Witness Arrival & The Digital Lifeline)
+## [0.4.1] - Bug Fix: Autoplay on Prefers-Reduced-Motion & Reduced-Motion Polish
+### Fixed
+- **Timeline Autoplay Bug**:
+  - Identified root cause in `src/engine/timeline.js`: ScrollTrigger was configured with `scrub: prefersReducedMotion ? false : true`. Setting `scrub: false` caused ScrollTrigger to default to `toggleActions: "play none none none"`, automatically playing the master timeline forward like a video when `prefers-reduced-motion: reduce` was active.
+  - Resolved by enforcing `scrub: true` across all modes, guaranteeing 100% scroll-driven timeline scrub without autonomous playback.
+- **Reduced Motion Behavior Tuning**:
+  - In `src/scenes/scene02.js`, decoupled ambulance siren light pulsation from scroll scrub into a dedicated looping tween (`initSirenPulse`) pulsing at $\le 1$ cycle per second (0.6s) under reduced motion, avoiding rapid seizure-inducing flashing.
+  - Softened impact tilt, removed dramatic shake, and reduced flash expansion during the accident scene under reduced motion.
+  - Verified butterfly wings flap at a constant slow rate (`0.30x`) without scroll-velocity acceleration when reduced motion is preferred.
+- **Autoplay Telemetry in Debug HUD**:
+  - Added "Autoplay" status check to the Debug HUD (`#hud-autoplay`).
+  - Reports `OK` if timeline progress remains unchanged for $\ge 2$ seconds while scroll velocity is zero; reports `FAIL` if progress changes autonomously without scroll input.
 ### Added
 - **Vector Smartphone Chassis (`src/assets/svg/phone-frame.svg`)**:
   - Precision flat vector mockup (< 1.5 KB) with rounded body, dynamic island speaker notch, side button notches, and screen clip path.

@@ -4,9 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * ONE master GSAP timeline, paused and scrubbed across the full scroll distance.
- * 9 labels (s1 through s9) are placed at equal spacing.
- * Scenes hook their tweens to this timeline relative to their labels.
+ * ONE master GSAP timeline, ALWAYS paused and driven EXCLUSIVELY by ScrollTrigger scrub.
+ * In every mode (normal and reduced-motion), this timeline NEVER autoplays or animates on its own.
  */
 export const masterTimeline = gsap.timeline({
   paused: true,
@@ -29,27 +28,16 @@ let masterScrollTrigger = null;
 
 /**
  * Initializes ScrollTrigger scrub for the master timeline.
- * Respects prefers-reduced-motion (disables scrub).
+ * ALWAYS uses scrub: true so progress is 100% tied to scroll distance in all modes.
  */
 export function initMasterTimeline() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   masterScrollTrigger = ScrollTrigger.create({
     animation: masterTimeline,
     trigger: '#scroll-track',
     start: 'top top',
     end: 'bottom bottom',
-    scrub: prefersReducedMotion ? false : true,
+    scrub: true, // Always true in every mode — never false, never autoplay
     invalidateOnRefresh: true,
-  });
-
-  // Dynamically update scrub if reduced motion preference changes
-  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  motionQuery.addEventListener('change', (event) => {
-    if (masterScrollTrigger) {
-      masterScrollTrigger.vars.scrub = event.matches ? false : true;
-      masterScrollTrigger.refresh();
-    }
   });
 
   return masterTimeline;
