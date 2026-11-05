@@ -8,6 +8,8 @@ const INJURED_TIMESCALE = 0.10;
 
 // Shared registry of active butterflies
 const registeredButterflies = new Set();
+let butterfly1Instance = null;
+let butterfly2Instance = null;
 
 let smoothedVelocity = 0;
 let currentTimeScale = IDLE_TIMESCALE;
@@ -158,6 +160,37 @@ export function createButterfly(rootElement, options = {}) {
 }
 
 /**
+ * Assigns named references for telemetry tracking.
+ */
+export function registerNamedButterfly(name, instance) {
+  if (name === 'butterfly1') butterfly1Instance = instance;
+  if (name === 'butterfly2') butterfly2Instance = instance;
+}
+
+/**
+ * Returns current wing timeScale for Butterfly 1.
+ */
+export function getWing1TimeScale() {
+  if (!butterfly1Instance) return currentTimeScale;
+  return butterfly1Instance.state === 'injured' ? INJURED_TIMESCALE : currentTimeScale;
+}
+
+/**
+ * Returns current wing timeScale for Butterfly 2.
+ */
+export function getWing2TimeScale() {
+  if (!butterfly2Instance) return IDLE_TIMESCALE;
+  return butterfly2Instance.state === 'injured' ? INJURED_TIMESCALE : currentTimeScale;
+}
+
+/**
+ * Legacy compatibility export for single HUD readout.
+ */
+export function getWingTimeScale() {
+  return currentTimeScale;
+}
+
+/**
  * Binds a butterfly's state (normal vs injured) to timeline position.
  * Bidirectional: scrubbing backward restores 'normal' state.
  */
@@ -170,11 +203,4 @@ export function bindButterflyToTimeline(butterflyInstance, masterTimeline, impac
       butterflyInstance.setState('injured');
     }
   });
-}
-
-/**
- * Returns current wing timeScale for Debug HUD telemetry.
- */
-export function getWingTimeScale() {
-  return currentTimeScale;
 }

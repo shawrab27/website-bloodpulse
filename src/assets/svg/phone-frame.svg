@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404 860" width="404" height="860" fill="none">
+  <!-- Outer Phone Chassis (Dark Maroon #2A0E13) -->
+  <rect x="2" y="2" width="400" height="856" rx="44" fill="#2A0E13" stroke="#4A1A22" stroke-width="3" />
+  
+  <!-- Subtle inner bezel rim -->
+  <rect x="8" y="8" width="388" height="844" rx="38" fill="#1A070B" />
+
+  <!-- Screen Cutout Area (Matches screen rect: x=14, y=14, w=376, h=832, rx=32) -->
+  <rect id="phone-screen-frame" x="14" y="14" width="376" height="832" rx="32" fill="#FFF8F7" />
+
+  <!-- Speaker / Camera Notch (Dynamic Island Pill) -->
+  <g id="phone-notch">
+    <rect x="157" y="24" width="90" height="24" rx="12" fill="#1A070B" />
+    <circle cx="225" cy="36" r="5" fill="#2A0E13" />
+    <circle cx="225" cy="36" r="2.5" fill="#3D141B" />
+  </g>
+
+  <!-- Side Buttons (Power on right, Volume on left) -->
+  <rect x="401" y="220" width="3" height="70" rx="1.5" fill="#4A1A22" />
+  <rect x="0" y="180" width="3" height="50" rx="1.5" fill="#4A1A22" />
+  <rect x="0" y="245" width="3" height="50" rx="1.5" fill="#4A1A22" />
+</svg>

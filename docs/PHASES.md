@@ -13,7 +13,7 @@ Development is strictly partitioned into linear, verifiable phases. No subsequen
 [Phase 2: Scenes 1-3 (Normalcy, Accident & Aftermath)] (DONE)
           │
           ▼
-[Phase 3: Scenes 4-5 (Witness Arrival & Phone Elevation)]
+[Phase 3: Scenes 4-5 (Witness Arrival & Phone Elevation)] (DONE)
           │
           ▼
 [Phase 4: Scenes 6-9 (Dispatch, Map Beacon, Match & Standby)]
@@ -84,13 +84,19 @@ Development is strictly partitioned into linear, verifiable phases. No subsequen
 ---
 
 ## Phase 3: Scenes 4–5 (Witness Arrival & The Digital Lifeline)
-- **Status**: [ ] Pending
+- **Status**: [x] Completed
 - **Deliverables**:
-  - [ ] `src/scenes/scene04.js`: Butterfly 2 glides into view from upper viewport, discovers wounded Butterfly 1, and hovers anxiously.
-  - [ ] `src/scenes/scene05.js`: Vector smartphone rises from bottom ($y=1080 \to 540$); illuminates display showing authentic top bar and 3 segments (Search for Donor, Emergency Blood, Blood Campaigns).
+  - [x] Vector smartphone chassis (`src/assets/svg/phone-frame.svg`, < 1.5 KB) with rounded frame, screen clip path, and dynamic island notch.
+  - [x] Converted real app screenshot `src/assets/img/screen-bloodhub.png` to WebP (119 KB) with PulseAI button paint-over preserving card background and original PNG.
+  - [x] `src/scenes/scene04.js`: Butterfly 2 enters from TOP of stage along curved bezier path (MotionPathPlugin), hovers close to Butterfly 1, and tilts head in concern.
+  - [x] `src/scenes/scene05.js`: Smartphone rises from below stage to center-right (`x=948, y=110`), Butterfly 2 ascends in front of phone to hover next to "Search for Donor" card (`SEARCH_DONOR_HOVER_X = 930`, `SEARCH_DONOR_HOVER_Y = 510`).
+  - [x] Lazy-load WebP screenshot only when scroll approaches Scene 4.
+  - [x] Debug HUD displays live wing speeds for both Butterfly 1 (injured) and Butterfly 2 (healthy witness).
 - **Acceptance Criteria**:
-  - Phone elevation coordinates lock accurately to center stage without jitter.
-  - Butterfly 2 moves in relation to the phone screen with natural organic easing.
+  - Seamless visual continuity across Scene 3 -> Scene 4 -> Scene 5.
+  - Butterfly 1 stays in place at (360, 885) and remains fully visible while phone elevates on center-right.
+  - Animate strictly transform and opacity.
+  - Build passes cleanly with zero errors.
 
 ---
 

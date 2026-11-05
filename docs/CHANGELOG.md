@@ -7,12 +7,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Planned
-- **Phase 3**: Implementation of Scene 04 (witness butterfly) and Scene 05 (device elevation).
 - **Phase 4**: Implementation of Scene 06 through Scene 09 (national map, matching, standby fail-safe).
 - **Phase 5**: Implementation of Scene 10 (revival) and Scene 11 (19 Flutter app screens & 6 features).
 - **Phase 6**: Implementation of Scene 12 (swarm convergence, logo lockup, footer CTAs).
 - **Phase 7**: Responsive tablet and mobile layouts, strict node capping, reduced-motion audit.
 - **Phase 8**: Production performance audit, cross-browser verification, and Nginx deployment pipeline.
+
+---
+
+## [0.4.0] - Phase 3: Scenes 4 and 5 (Witness Arrival & The Digital Lifeline)
+### Added
+- **Vector Smartphone Chassis (`src/assets/svg/phone-frame.svg`)**:
+  - Precision flat vector mockup (< 1.5 KB) with rounded body, dynamic island speaker notch, side button notches, and screen clip path.
+- **Real App Screenshot Conversion**:
+  - Converted `src/assets/img/screen-bloodhub.png` (1179x2556) to WebP (119 KB) at quality 85.
+  - Floating PulseAI button circle sampled with card background color and painted over, leaving original PNG untouched.
+- **Modular Scene 04 (`src/scenes/scene04.js`, label 's4')**:
+  - Visual continuity from Scene 3 (empty street, Butterfly 1 injured in bottom-left).
+  - Butterfly 2 (healthy witness) swoops down from top along an organic bezier path via `MotionPathPlugin`.
+  - Butterfly 2 decelerates, hovers beside Butterfly 1, and tilts head in concern (`rotation: -30`).
+  - WebP screenshot lazy-loaded when scroll approaches `s4`.
+- **Modular Scene 05 (`src/scenes/scene05.js`, label 's5')**:
+  - Smartphone frame elevates from below canvas to center-right (`x: 948, y: 110`, height 860px).
+  - WebP screenshot displayed inside phone clipped by SVG screen rect, displaying real app UI (BloodPulse top bar, Search for Donor, Emergency Blood, Blood Campaigns).
+  - Butterfly 2 takes flight in front of phone and hovers beside the "Search for Donor" card.
+  - Named constants exported (`SEARCH_DONOR_HOVER_X = 930`, `SEARCH_DONOR_HOVER_Y = 510`) for precise adjustment.
+  - Butterfly 1 remains visible on the ground in bottom-left.
+- **Dual Butterfly Wing HUD Telemetry**:
+  - Debug HUD updated to display both `Wing 1` (injured spasms at 0.10x) and `Wing 2` (velocity-coupled from 0.30x to 1.80x).
 
 ---
 

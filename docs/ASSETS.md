@@ -6,9 +6,9 @@ Every visual, vector, and raster asset required for the 12-scene animation exper
 
 | Asset Identifier | File Path | Owner | Status | Format | Dimensions | Target Max Size | Usage & Notes |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Butterfly Master Vector** | `src/assets/svg/butterfly.svg` | Agent | Drafted | SVG | Vector ($240 \times 180$) | $< 8\text{ KB}$ | Articulated left/right wings + body. Reused in Scenes 1, 4, 7, 8, 9, 10, 12. |
-| **Emergency Ambulance** | `src/assets/svg/ambulance.svg` | Agent | Pending | SVG | Vector ($480 \times 220$) | $< 12\text{ KB}$ | High-contrast emergency vehicle with active siren light layer. Scenes 2 & 3. |
-| **Smartphone Chassis Mock** | `src/assets/svg/phone-frame.svg` | Agent | Pending | SVG | Vector ($420 \times 860$) | $< 15\text{ KB}$ | Modern bezel-less chassis with speaker notch and display mask cutout. |
+| **Butterfly Master Vector** | `src/assets/svg/butterfly.svg` | Agent | Ready | SVG | Vector ($200 \times 150$) | $< 8\text{ KB}$ (3.2 KB) | Articulated left/right wings + body. Reused in Scenes 1, 4, 7, 8, 9, 10, 12. |
+| **Emergency Ambulance** | `src/assets/svg/ambulance.svg` | Agent | Ready | SVG | Vector ($440 \times 220$) | $< 12\text{ KB}$ (3.7 KB) | High-contrast emergency vehicle with active siren light layer. Scenes 2 & 3. |
+| **Smartphone Chassis Mock** | `src/assets/svg/phone-frame.svg` | Agent | Ready | SVG | Vector ($404 \times 860$) | $< 15\text{ KB}$ (1.1 KB) | Modern bezel-less chassis with speaker notch and display mask cutout. Scene 5 & 11. |
 | **Bangladesh Vector Map** | `src/assets/svg/bangladesh-map.svg`| Agent | Pending | SVG | Vector ($800 \times 1000$)| $< 30\text{ KB}$ | Stylized administrative district borders of Bangladesh. Scene 7 & 8. |
 | **ECG Pulse Line** | `src/assets/svg/ecg-pulse.svg` | Agent | Pending | SVG | Vector ($600 \times 120$) | $< 4\text{ KB}$ | Vital sign heartbeat wave used in transitions and loading pulses. |
 | **BloodPulse Official Logo** | `src/assets/svg/logo-bloodpulse.svg`| User | TBD | SVG | Vector | $< 15\text{ KB}$ | Official logomark. User will supply final production SVG. Scene 1 & 12. |
@@ -34,7 +34,7 @@ All app screenshots are provided by the **User** (exported from the Flutter app)
 | **07** | `screen-donor-tracking.webp` | Live donor transit route & ETA | User | TBD | WebP | $840 \times 1720$ | $< 90\text{ KB}$ |
 | **08** | `screen-standby-donor.webp` | Standby fail-safe donor confirmation card | User | TBD | WebP | $840 \times 1720$ | $< 85\text{ KB}$ |
 | **09** | `screen-feed.webp` | Community news feed, donations, stories | User | TBD | WebP | $840 \times 1720$ | $< 95\text{ KB}$ |
-| **10** | `screen-blood-hub.webp` | Blood Hub inventory matrix & hospital sync | User | TBD | WebP | $840 \times 1720$ | $< 90\text{ KB}$ |
+| **10** | `screen-blood-hub.webp` | Blood Hub inventory matrix & hospital sync | User / Agent | Ready | WebP | $1179 \times 2556$ | $119\text{ KB}$ |
 | **11** | `screen-health-ai-report.webp` | PulseAI automated CBC lab report analyzer | User | TBD | WebP | $840 \times 1720$ | $< 90\text{ KB}$ |
 | **12** | `screen-health-calculators.webp`| Blood volume and eligibility calculators | User | TBD | WebP | $840 \times 1720$ | $< 85\text{ KB}$ |
 | **13** | `screen-health-accessories.webp`| Medical accessories and donation logistics | User | TBD | WebP | $840 \times 1720$ | $< 85\text{ KB}$ |
@@ -60,7 +60,7 @@ Used as secondary decorative media elements inside Scene 11 (Feed overview):
 ---
 
 ## 4. Asset Ingestion Protocol
-1. User provides raw screenshots/assets in high resolution.
+1. User provides raw screenshots/assets in high resolution (`src/assets/img/screen-bloodhub.png`).
 2. Agent validates that filenames strictly match the table above.
-3. Assets are compressed to WebP (quality 80–84) via modern tooling.
+3. Assets are converted to WebP (quality 85) via sharp, with UI cleanup scripts where required.
 4. SVGs are sanitized with SVGO to strip editor metadata, inline styles, and unneeded attributes before committing.
