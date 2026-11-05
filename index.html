@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BloodPulse</title>
+  </head>
+  <body>
+    <!-- Scroll track defines the 1200vh total scroll distance -->
+    <div id="scroll-track" aria-hidden="true"></div>
+
+    <!-- Pinned full-viewport stage -->
+    <div id="stage-viewport">
+      <!-- Fixed 1920x1080 design canvas (letterboxed & scaled via CSS) -->
+      <div id="canvas-stage">
+        <svg
+          id="stage-svg"
+          viewBox="0 0 1920 1080"
+          preserveAspectRatio="xMidYMid meet"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Phase 0 Canvas Placeholder -->
+          <rect width="1920" height="1080" fill="transparent" />
+          <text
+            x="960"
+            y="540"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            fill="#B5B0AE"
+            font-family="Georgia, serif"
+            font-size="28"
+            letter-spacing="2"
+          >
+            BLOODPULSE &bull; STAGE 1920&times;1080 [PHASE 0]
+          </text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Responsive Fallback for Tablet / Mobile -->
+    <div id="device-fallback" role="alert" aria-live="polite">
+      <h2>BloodPulse</h2>
+      <p class="fallback-text">Mobile experience is coming soon. Please view on a desktop screen (1024px+).</p>
+    </div>
+
+    <!-- Debug HUD (toggle with key 'D', hidden by default) -->
+    <aside id="debug-hud" class="hud-hidden" aria-label="Debug HUD">
+      <div class="hud-title">
+        <span>Debug HUD</span>
+        <span>[D]</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-label">Scroll:</span>
+        <span id="hud-progress" class="hud-val">0.0%</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-label">Label:</span>
+        <span id="hud-label" class="hud-val">s1</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-label">FPS:</span>
+        <span id="hud-fps" class="hud-val">60</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-label">Velocity:</span>
+        <span id="hud-velocity" class="hud-val">0 px/s</span>
+      </div>
+      <div class="hud-hint">Press 'D' to toggle</div>
+    </aside>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
