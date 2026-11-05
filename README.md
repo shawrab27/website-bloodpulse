@@ -6,6 +6,24 @@ An interactive, scroll-driven storytelling web experience for BloodPulse. Built 
 
 ---
 
+## Documentation
+
+Full project specifications, design rules, and operational guidelines are available in the [`docs/`](docs/) directory and repository root:
+
+- [**AGENTS.md**](AGENTS.md) — Mandatory execution rules and constraints for all AI agents.
+- [**Product Requirements Document (PRD)**](docs/PRD.md) — Vision, user personas, success metrics, user journey, scene catalog, and requirements matrix.
+- [**Technical Requirements Document (TRD)**](docs/TRD.md) — Architecture, engine subsystems, scene module contracts, data flow, and architectural decision records.
+- [**Design System & Storyboard (DESIGN.md)**](docs/DESIGN.md) — Tokens, canvas rules, motion principles, butterfly kinematics, and scene-by-scene storyboard.
+- [**Performance Budgets (PERFORMANCE.md)**](docs/PERFORMANCE.md) — Size & FPS budgets, compositor rules, node capping, telemetry HUD, and low-end device testing.
+- [**Security Policy (SECURITY.md)**](docs/SECURITY.md) — Static site threat model, HTTPS/HSTS, CSP headers, outbound link hygiene, and VPS hardening.
+- [**Deployment Guide (DEPLOYMENT.md)**](docs/DEPLOYMENT.md) — Production Nginx configuration, SSL setup, atomic symlink releases, and rollback protocols.
+- [**Asset Registry (ASSETS.md)**](docs/ASSETS.md) — Master inventory of vectors, app UI screenshots (19 screens), ownership, and size budgets.
+- [**Implementation Roadmap (PHASES.md)**](docs/PHASES.md) — Linear phase breakdown (Phase 0 to 8) with deliverables and acceptance criteria.
+- [**Testing Protocol (TESTING.md)**](docs/TESTING.md) — Scene-by-scene manual QA checklist, browser matrix, and accessibility verification.
+- [**Changelog (CHANGELOG.md)**](docs/CHANGELOG.md) — Complete record of versioned milestones and feature releases.
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -58,10 +76,11 @@ npm run preview
 
 ```
 website-bloodpulse/
+├── docs/                   # Full documentation suite
 ├── public/                 # Static assets
 ├── src/
 │   ├── assets/
-│   │   ├── img/            # Raster images
+│   │   ├── img/            # Raster images & app screenshots
 │   │   └── svg/            # SVG vector assets
 │   ├── engine/
 │   │   ├── device.js       # Breakpoints & canvas letterbox scaling
@@ -77,43 +96,33 @@ website-bloodpulse/
 ├── index.html              # Root HTML & design canvas container
 ├── package.json            # Scripts & dependencies (vite, gsap, lenis)
 ├── .gitignore              # Ignored paths (node_modules, dist)
-└── README.md               # Documentation
+├── AGENTS.md               # Mandatory agent execution rules
+└── README.md               # Documentation & setup guide
 ```
 
 ---
 
 ## Deploy to VPS (Nginx static)
 
-When deploying to a Linux VPS:
+For detailed production instructions, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
-1. Build the production bundle:
-   ```bash
-   npm run build
-   ```
-2. Upload the `dist/` directory to your web server (e.g. `/var/www/bloodpulse/dist`).
-3. Example Nginx configuration block (`/etc/nginx/sites-available/bloodpulse`):
-   ```nginx
-   server {
-       listen 80;
-       server_name bloodpulse.example.com;
+Quick Nginx configuration snippet (`/etc/nginx/sites-available/bloodpulse`):
+```nginx
+server {
+    listen 80;
+    server_name bloodpulse.example.com;
 
-       root /var/www/bloodpulse/dist;
-       index index.html;
+    root /var/www/bloodpulse/current/dist;
+    index index.html;
 
-       location / {
-           try_files $uri $uri/ /index.html;
-       }
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
 
-       # Cache static assets
-       location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2)$ {
-           expires 1y;
-           add_header Cache-Control "public, no-transform";
-       }
-   }
-   ```
-4. Enable the site and reload Nginx:
-   ```bash
-   sudo ln -s /etc/nginx/sites-available/bloodpulse /etc/nginx/sites-enabled/
-   sudo nginx -t
-   sudo systemctl reload nginx
-   ```
+    # Cache static assets
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
+    }
+}
+```
