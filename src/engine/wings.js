@@ -4,6 +4,7 @@ import { getLenis } from './scroll.js';
 // Kinematic scale boundaries
 const IDLE_TIMESCALE = 0.3;
 const MAX_TIMESCALE = 1.8;
+const INJURED_TIMESCALE = 0.10;
 
 // Shared registry of active butterflies
 const registeredButterflies = new Set();
@@ -41,7 +42,7 @@ function ensureSharedTicker() {
         Math.max(IDLE_TIMESCALE, IDLE_TIMESCALE + smoothedVelocity * 0.12)
       );
 
-      // Smooth damping back to idle when scrolling stops (decay half-life ~0.2s)
+      // Smooth damping back to idle when scrolling stops
       const dampFactor = targetTimeScale < currentTimeScale ? 0.08 : 0.16;
       currentTimeScale += (targetTimeScale - currentTimeScale) * dampFactor;
     }
@@ -51,7 +52,8 @@ function ensureSharedTicker() {
       if (butterfly.state === 'normal') {
         butterfly.wingTimeline.timeScale(currentTimeScale);
       } else if (butterfly.state === 'injured') {
-        butterfly.wingTimeline.timeScale(0.12); // Weak, faint spasms
+        // Slow weak spasms, wings NEVER fully stop, no scroll-speed boost
+        butterfly.wingTimeline.timeScale(INJURED_TIMESCALE);
       }
     }
   });
@@ -118,11 +120,28 @@ export function createButterfly(rootElement, options = {}) {
     floatTween,
     state: 'normal',
     setState(newState) {
+      if (this.state === newState) return;
       this.state = newState;
       if (newState === 'injured') {
-        wingTimeline.timeScale(0.12);
+        // Weak spasms: wings never fully stop, reduced amplitude, fixed slow speed
+        wingTimeline.timeScale(INJURED_TIMESCALE);
+        if (leftWing && rightWing) {
+          gsap.to([leftWing, rightWing], {
+            scaleX: 0.65,
+            duration: 0.4,
+            ease: 'power1.out',
+          });
+        }
         floatTween.pause();
       } else {
+        // Normal flight: full wing flap amplitude, velocity coupled, float active
+        if (leftWing && rightWing) {
+          gsap.to([leftWing, rightWing], {
+            scaleX: 0.18,
+            duration: 0.4,
+            ease: 'power1.out',
+          });
+        }
         wingTimeline.timeScale(currentTimeScale);
         floatTween.play();
       }
@@ -136,6 +155,21 @@ export function createButterfly(rootElement, options = {}) {
 
   registeredButterflies.add(butterflyRecord);
   return butterflyRecord;
+}
+
+/**
+ * Binds a butterfly's state (normal vs injured) to timeline position.
+ * Bidirectional: scrubbing backward restores 'normal' state.
+ */
+export function bindButterflyToTimeline(butterflyInstance, masterTimeline, impactTime = 1.65) {
+  masterTimeline.eventCallback('onUpdate', () => {
+    const t = masterTimeline.time();
+    if (t < impactTime) {
+      butterflyInstance.setState('normal');
+    } else {
+      butterflyInstance.setState('injured');
+    }
+  });
 }
 
 /**

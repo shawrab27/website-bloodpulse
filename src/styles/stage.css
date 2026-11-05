@@ -43,11 +43,108 @@
   display: block;
 }
 
-/* Debug HUD */
+/* Persistent Floating CTA (Top-Right, always visible, not in timeline) */
+.floating-cta {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: var(--z-overlay);
+  background-color: var(--primary);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(195, 1, 33, 0.28);
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+  pointer-events: auto;
+  letter-spacing: 0.02em;
+}
+
+.floating-cta:hover {
+  background-color: #A8001A;
+  transform: translateY(-1px);
+}
+
+/* Scene 1 Hero Overlay (HTML layer scaled inside canvas-stage) */
+#scene-01-hero {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 140px 60px 100px;
+  pointer-events: none;
+  z-index: var(--z-content);
+  box-sizing: border-box;
+}
+
+.hero-brand {
+  text-align: center;
+  pointer-events: auto;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--maroon);
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  pointer-events: auto;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hero-btn-primary {
+  background-color: var(--primary);
+  color: var(--bg);
+  box-shadow: 0 4px 14px rgba(195, 1, 33, 0.22);
+}
+
+.hero-btn-primary:hover {
+  background-color: #A8001A;
+  transform: translateY(-2px);
+}
+
+.hero-btn-secondary {
+  background-color: transparent;
+  color: var(--maroon);
+  border: 1.5px solid var(--maroon);
+}
+
+.hero-btn-secondary:hover {
+  background-color: rgba(74, 26, 34, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Debug HUD (Pinned Top-Left) */
 #debug-hud {
   position: fixed;
   top: 16px;
-  right: 16px;
+  left: 16px;
   z-index: var(--z-hud);
   background-color: rgba(74, 26, 34, 0.92);
   color: #FFF8F7;

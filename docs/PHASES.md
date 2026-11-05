@@ -10,7 +10,7 @@ Development is strictly partitioned into linear, verifiable phases. No subsequen
 [Phase 1: Butterfly Engine & Kinematics] (DONE)
           │
           ▼
-[Phase 2: Scenes 1-3 (Normalcy, Accident & Aftermath)]
+[Phase 2: Scenes 1-3 (Normalcy, Accident & Aftermath)] (DONE)
           │
           ▼
 [Phase 3: Scenes 4-5 (Witness Arrival & Phone Elevation)]
@@ -67,15 +67,19 @@ Development is strictly partitioned into linear, verifiable phases. No subsequen
 ---
 
 ## Phase 2: Scenes 1–3 (Normalcy, Accident & Aftermath)
-- **Status**: [ ] Pending
+- **Status**: [x] Completed
 - **Deliverables**:
-  - [ ] `src/scenes/scene01.js`: Butterfly 1 idle flight, BloodPulse logo, top CTA buttons (Web App, Google Play, App Store).
-  - [ ] `src/scenes/scene02.js`: Butterfly 1 descends; vector ambulance accelerates in from left ($x < 0$) with flashing siren and strikes Butterfly 1.
-  - [ ] `src/scenes/scene03.js`: Ambulance exits rapidly to the right; Butterfly 1 lies injured in lower-right canvas corner with feeble wing spasms.
+  - [x] Vector ambulance asset (`src/assets/svg/ambulance.svg`, < 6 KB) with maroon body, red stripe, white star of life, windows, wheels, and red `#siren` group.
+  - [x] Persistent top-right floating "Open Web App" CTA button outside the timeline.
+  - [x] `src/scenes/scene01.js`: Butterfly 1 idle center flight, logo, and 3 buttons near bottom fading out on scroll.
+  - [x] `src/scenes/scene02.js`: Butterfly 1 descends, ambulance rushes from left with siren pulsing, strikes butterfly (tilt + forward shove + downward tumble).
+  - [x] `src/scenes/scene03.js`: Ambulance exits off-stage to the right, Butterfly 1 settles onto ground in bottom-left area, tilted, in 'injured' mode (faint weak spasms).
+  - [x] Bidirectional scrubbing support for butterfly state transitions (normal vs injured).
 - **Acceptance Criteria**:
   - Seamless continuity: Scene 1 seamlessly transitions to Scene 2 collision; Scene 2 cleanly hands off to Scene 3.
   - Zero text or dialogue in narrative animations.
-  - Butterfly 1 remains visible in the corner throughout subsequent scenes.
+  - Butterfly 1 remains visible on the ground in bottom-left area at the end of Scene 3.
+  - Build passes cleanly with zero errors.
 
 ---
 

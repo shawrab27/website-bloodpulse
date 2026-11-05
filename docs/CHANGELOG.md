@@ -7,13 +7,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Planned
-- **Phase 2**: Implementation of Scene 01, Scene 02 (ambulance collision), and Scene 03 (aftermath).
 - **Phase 3**: Implementation of Scene 04 (witness butterfly) and Scene 05 (device elevation).
 - **Phase 4**: Implementation of Scene 06 through Scene 09 (national map, matching, standby fail-safe).
 - **Phase 5**: Implementation of Scene 10 (revival) and Scene 11 (19 Flutter app screens & 6 features).
 - **Phase 6**: Implementation of Scene 12 (swarm convergence, logo lockup, footer CTAs).
 - **Phase 7**: Responsive tablet and mobile layouts, strict node capping, reduced-motion audit.
 - **Phase 8**: Production performance audit, cross-browser verification, and Nginx deployment pipeline.
+
+---
+
+## [0.3.0] - Phase 2: Scenes 1 to 3 (Normalcy, Accident & Aftermath)
+### Added
+- **Vector Ambulance Asset (`src/assets/svg/ambulance.svg`)**:
+  - High-contrast flat vector facing right with maroon body (`#4A1A22`), crimson stripe (`#C30121`), white star-of-life, windows, wheels, and red siren dome group (`#siren`) (< 3.5 KB).
+- **Persistent Floating CTA**:
+  - Fixed "Open Web App" pill anchored at top-right (`.floating-cta`), independent of timeline scroll scrub.
+- **Modular Scene 01 (`src/scenes/scene01.js`, label 's1')**:
+  - Butterfly 1 at canvas center `(960, 540)` in gentle idle flight.
+  - Centered Georgia title "BloodPulse" and 3 download/action buttons near bottom.
+  - Buttons and title fade out smoothly on initial scroll (`opacity: 0`).
+  - Butterfly 1 begins descending toward street level as ground line appears.
+- **Modular Scene 02 (`src/scenes/scene02.js`, label 's2')**:
+  - Soft grey-pink street atmosphere with ground line at `y=900`.
+  - Ambulance accelerates in from stage left (`x < 0`) with pulsing red siren light.
+  - Collision at `s2+=0.65`: impact flash aura, butterfly tilts/rotates and gets pushed forward before falling to the ground.
+- **Modular Scene 03 (`src/scenes/scene03.js`, label 's3')**:
+  - Ambulance continues driving and exits off-stage to the right (`x > 1920`).
+  - Butterfly 1 settles onto ground in bottom-left area (`x: 360, y: 885`), tilted, in 'injured' mode.
+  - 'Injured' mode: slow weak spasms, wings NEVER fully stop, no scroll-speed boost.
+  - Bidirectional scrub support: scrolling back past impact restores 'normal' flight.
+  - Final frame of Scene 3 forms the exact calm street starting frame for Scene 4.
 
 ---
 

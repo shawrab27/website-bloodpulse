@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * ONE master GSAP timeline, paused and scrubbed across the full scroll distance.
  * 9 labels (s1 through s9) are placed at equal spacing.
- * Scenes will hook their tweens to this timeline in subsequent phases.
+ * Scenes hook their tweens to this timeline relative to their labels.
  */
 export const masterTimeline = gsap.timeline({
   paused: true,
@@ -33,23 +33,6 @@ let masterScrollTrigger = null;
  */
 export function initMasterTimeline() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Phase 1 Test Scene: Butterfly 1 starts at center (960, 540)
-  // During first 10% of scroll (time 0 to 0.8 of total duration 8), moves slowly downward
-  const butterfly1 = document.getElementById('butterfly-1');
-  if (butterfly1) {
-    gsap.set(butterfly1, { x: 960, y: 540 });
-
-    masterTimeline.to(
-      butterfly1,
-      {
-        y: 660,
-        duration: 0.8,
-        ease: 'none',
-      },
-      0
-    );
-  }
 
   masterScrollTrigger = ScrollTrigger.create({
     animation: masterTimeline,
